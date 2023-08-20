@@ -5,9 +5,9 @@ const SECRET_KEY = process.env.SECRET_KEY;
 //set falsey alternatives just in case
 const REDIRECT_URI = process.env.REDIRECT_URI || `http://localhost:${PORT}/home`;
 
-//object is used for authentication alone
 //separate SpotifyWebApis for the actual API calls with access tokens
 const SpotifyWebApi = require("spotify-web-api-node");
+//object is used for authentication alone
 const spotifyAuthAPI = new SpotifyWebApi({
     clientId: CLIENT_ID,
     clientSecret: SECRET_KEY,
@@ -71,11 +71,56 @@ app.get('/login', (req, res) => {
     res.redirect(loginLink);
 });
 
-app.get('/home', (req, res) => {});
+app.get('/home', (req, res) => {
+    //check state against the user's cookies and send them away if it doesn't match
+    //access authentication code and state variable through req.query
+    if(req.query.state !== req.cookies.authState) {
+        return res.redirect("/");
+    }
 
-const accTokenRefresh = (req, res, next) => {};
+    res.clearCookie("authState");
 
-app.get('/faves', (req, res) => {});
+    //turn the authentication code into access and refresh tokens
+    const authenticationCode = req.query.code;
+    if (authenticationCode) {
+        //authorizationCodeGrant returns a promise that yields th tokens
+        //placed in cookies
+        spotifyAuthAPI.authorizationCodeGrant(authenticationCode).then((data) => {
+            res.cookie("accToken", data.body["access_token"], {
+                maxAge: data.body["expires_in"] * 1000,
+            });
+            res.cookie("refToken", data.body["refresh_token"]);
+
+            //use access token
+            return res.status(200).send(`<pre>${JSON.stringify(data.body, null, 2)}</pre>`);
+        })
+    }
+});
+
+//middleware to check user's cookies for an access token
+//no access token, then it asks Spotify for a new access token using a refresh token
+//if no refresh token -> login page
+const accTokenRefresh = (req, res, next) => {
+    if (req.cookies.accToken) return next();
+    else if (req.cookies.refToken) {
+        spotifyAuthAPI.setRefreshToken(refresh_token);
+        spotifyAuthAPI.refreshAccessToken()
+          .then((data) => {
+            spotifyAuthAPI.resetRefreshToken();
+
+            const newAccToken = data.body["access_token"];
+            res.cookie("accToken", newAccToken, {
+                maxAge: data.body["expires_in"] * 1000,
+            });
+
+            return next();
+          });
+    } else {
+        return res.redirect('/login');
+    }
+};
+
+app.get('/faves', accTokenRefresh, (req, res) => {});
 
 console.log('authTest running on port' + PORT);
 app.listen(PORT);

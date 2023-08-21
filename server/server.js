@@ -72,11 +72,36 @@ app.get('/login', (req, res) => {
     res.redirect(loginLink);
 });
 
+//middleware to check user's cookies for an access token
+//no access token, then it asks Spotify for a new access token using a refresh token
+//if no refresh token -> login page
+const accTokenRefresh = (req, res, next) => {
+    if (req.cookies.accToken) return next();
+    else if (req.cookies.refToken) {
+        spotifyAuthAPI.setRefreshToken(refresh_token);
+        spotifyAuthAPI.refreshAccessToken()
+          .then((data) => {
+            spotifyAuthAPI.resetRefreshToken();
+
+            //get new access token from our server
+            const newAccToken = data.body["access_token"];
+            //set it into cookies with new expiration timer
+            res.cookie("accToken", newAccToken, {
+                maxAge: data.body["expires_in"] * 1000,
+            });
+
+            return next();
+          });
+    } else {
+        return res.redirect('/login');
+    }
+};
+
 app.get('/home', (req, res) => {
     //check state against the user's cookies and send them away if it doesn't match
     //access authentication code and state variable through req.query
     if(req.query.state !== req.cookies.authState) {
-        return res.redirect("/");
+        return res.redirect("/login");
     }
 
     res.clearCookie("authState");
@@ -97,29 +122,6 @@ app.get('/home', (req, res) => {
         })
     }
 });
-
-//middleware to check user's cookies for an access token
-//no access token, then it asks Spotify for a new access token using a refresh token
-//if no refresh token -> login page
-const accTokenRefresh = (req, res, next) => {
-    if (req.cookies.accToken) return next();
-    else if (req.cookies.refToken) {
-        spotifyAuthAPI.setRefreshToken(refresh_token);
-        spotifyAuthAPI.refreshAccessToken()
-          .then((data) => {
-            spotifyAuthAPI.resetRefreshToken();
-
-            const newAccToken = data.body["access_token"];
-            res.cookie("accToken", newAccToken, {
-                maxAge: data.body["expires_in"] * 1000,
-            });
-
-            return next();
-          });
-    } else {
-        return res.redirect('/login');
-    }
-};
 
 //get Top Tracks and Artists
 app.get('/tracks', accTokenRefresh, (req, res) => {

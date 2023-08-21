@@ -1,34 +1,33 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const port = process.env.PORT || 3002;
 
 module.exports = {
-  entry: './src/client/index.js',
+  entry: './client/index.js',
   output: {
-    path: path.join(__dirname, '/chrome-extension/dist'),
+    path: path.join(__dirname, '/dist'),
     publicPath: '/',
     filename: 'dist.js',
   },
-  devtool: 'inline-source-map',
   mode: 'development',
   devServer: {
     host: 'localhost',
     hot: true,
     open: true,
     compress: true,
-    // historyApiFallback: true,
+    historyApiFallback: true,
     port: 8080,
     static: {
       directory: path.join(__dirname, '/dist'),
-      publicPath: '/',
+      publicPath: '/api',
     },
     proxy: {
-      '/': 'http://localhost:3001',
-      secure: false,
+      '/api': `http://localhost:${port}/`
     },
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, './client/index.html'),
+      template: './client/public/index.html'
     }),
   ],
   module: {
@@ -66,9 +65,6 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.js'],
-    alias: {
-      react: path.resolve('./node_modules/react'),
-    },
+    extensions: ['.js', '.jsx']
   },
 };

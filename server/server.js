@@ -1,9 +1,9 @@
 require('dotenv').config();
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT;
 const CLIENT_ID = process.env.CLIENT_ID;
 const SECRET_KEY = process.env.SECRET_KEY;
 //set falsey alternatives just in case
-const REDIRECT_URI = process.env.REDIRECT_URI || `http://localhost:${PORT}/home`;
+const REDIRECT_URI = process.env.REDIRECT_URI;
 
 //separate SpotifyWebApis for the actual API calls with access tokens
 const SpotifyWebApi = require("spotify-web-api-node");
@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, '../client/public')));
 
 //routes
 //leads the user to the Spotify page for the user to enter their login credentials
-app.get('/login', (req, res) => {
+app.get('/api/login', (req, res) => {
     //recommended to adding a state variable to avoid cross site attacks
     //generate a random string of letters and numbers
     const generateRandomString = (length) => {
@@ -93,15 +93,15 @@ const accTokenRefresh = (req, res, next) => {
             return next();
           });
     } else {
-        return res.redirect('/login');
+        return res.redirect('/api/login');
     }
 };
 
-app.get('/home', (req, res) => {
+app.get('/api/home', (req, res) => {
     //check state against the user's cookies and send them away if it doesn't match
     //access authentication code and state variable through req.query
     if(req.query.state !== req.cookies.authState) {
-        return res.redirect("/login");
+        return res.redirect("/api/login");
     }
 
     res.clearCookie("authState");
@@ -117,14 +117,14 @@ app.get('/home', (req, res) => {
             });
             res.cookie("refToken", data.body["refresh_token"]);
 
-            //use access token
-            return res.status(200).send(`<pre>${JSON.stringify(data.body, null, 2)}</pre>`);
+            //redirect user
+            return res.status(200).redirect('http://localhost:8080/home');
         })
     }
 });
 
 //get Top Tracks and Artists
-app.get('/tracks', accTokenRefresh, (req, res) => {
+app.get('/api/tracks', accTokenRefresh, (req, res) => {
     const spotifyAPI = new SpotifyWebApi({ accessToken: req.cookies.accToken });
 
     let count = 20;
@@ -136,7 +136,7 @@ app.get('/tracks', accTokenRefresh, (req, res) => {
       });
 });
 
-app.get('/artists', accTokenRefresh, (req, res) => {
+app.get('/api/artists', accTokenRefresh, (req, res) => {
     const spotifyAPI = new SpotifyWebApi({ accessToken: req.cookies.accToken });
 
     let count = 20;
@@ -148,7 +148,7 @@ app.get('/artists', accTokenRefresh, (req, res) => {
       });
 });
 
-app.get('/profile', accTokenRefresh, (req, res) => {
+app.get('/api/profile', accTokenRefresh, (req, res) => {
     const spotifyAPI = new SpotifyWebApi({ accessToken: req.cookies.accToken });
 
     spotifyAPI
@@ -157,6 +157,9 @@ app.get('/profile', accTokenRefresh, (req, res) => {
         return res.status(200).send(`<pre>${JSON.stringify(data.body, null, 2)}</pre>`);
       })
 });
+
+// catch all
+app.use((req, res) => res.status(404).send('Page not found'));
 
 //global error handling
 app.use((err, req, res, next) => {

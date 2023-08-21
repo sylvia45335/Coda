@@ -1,13 +1,12 @@
 import * as _ from 'lodash';
 import * as React from "react";
-import Home from './Home.jsx';
 
-function App() {
+function Home() {
     return (
         <div>
-            <Home />
+            Home
         </div>
     )
-}
+};
 
-export default App;
+export default Home;

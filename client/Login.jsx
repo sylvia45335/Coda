@@ -1,13 +1,13 @@
 import * as _ from 'lodash';
 import * as React from "react";
-import Home from './Home.jsx';
 
-function App() {
+function Login() {
+
     return (
         <div>
-            <Home />
+            <a href='http://localhost:3001/api/login'>Login</a>
         </div>
     )
-}
+};
 
-export default App;
+export default Login;

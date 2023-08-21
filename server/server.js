@@ -60,7 +60,8 @@ app.get('/login', (req, res) => {
     //allows our application to legally make requests to Spotify's API with the user's allowance in mind
 
     //user-top-read is for user's Top Tracks and Albums
-    const scopes = ["user-top-read"];
+    //user-read-email & user-read-private is for user's profile to get display name
+    const scopes = ["user-top-read", "user-read-private", "user-read-email"];
     //spotify node api method that creates a link that leads to the Spotify Account Login page with a set of requested scopes
     //second param is state and is optional
         //state we pass will be returned from Spotify
@@ -120,7 +121,52 @@ const accTokenRefresh = (req, res, next) => {
     }
 };
 
-app.get('/faves', accTokenRefresh, (req, res) => {});
+//get Top Tracks and Artists
+app.get('/tracks', accTokenRefresh, (req, res) => {
+    const spotifyAPI = new SpotifyWebApi({ accessToken: req.cookies.accToken });
+
+    let count = 20;
+
+    spotifyAPI
+      .getMyTopTracks({ limit: count, time_range: "short_term" })
+      .then((data) => {
+        return res.status(200).send(`<pre>${JSON.stringify(data.body.items, null, 2)}</pre>`);
+      });
+});
+
+app.get('/artists', accTokenRefresh, (req, res) => {
+    const spotifyAPI = new SpotifyWebApi({ accessToken: req.cookies.accToken });
+
+    let count = 20;
+
+    spotifyAPI
+      .getMyTopArtists({ limit: count, time_range: "short_term" })
+      .then((data) => {
+        return res.status(200).send(`<pre>${JSON.stringify(data.body.items, null, 2)}</pre>`);
+      });
+});
+
+app.get('/profile', accTokenRefresh, (req, res) => {
+    const spotifyAPI = new SpotifyWebApi({ accessToken: req.cookies.accToken });
+
+    spotifyAPI
+      .getMe()
+      .then((data) => {
+        return res.status(200).send(`<pre>${JSON.stringify(data.body, null, 2)}</pre>`);
+      })
+});
+
+//global error handling
+app.use((err, req, res, next) => {
+    const defaultErr = {
+        log: 'Express global error handler caught unknown error',
+        status: 400,
+        message: { err: 'An unknown error occurred'}
+    };
+
+    const errObj = Object.assign(defaultErr, err);
+    res.status(errObj.status).send(JSON.stringify(errObj.message));
+});
 
 console.log('authTest running on port' + PORT);
 app.listen(PORT);

@@ -111,6 +111,9 @@ app.get('/api/home', (req, res) => {
         //authorizationCodeGrant returns a promise that yields th tokens
         //placed in cookies
         spotifyAuthAPI.authorizationCodeGrant(authenticationCode).then((data) => {
+            // spotifyAuthAPI.setAccessToken(data.body['access_token']);
+            // spotifyAuthAPI.setRefreshToken(data.body['refresh_token']);
+
             res.cookie("accToken", data.body["access_token"], {
                 maxAge: data.body["expires_in"] * 1000,
             });

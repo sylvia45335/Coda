@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Artists from './components/Artists.jsx';
 import Tracks from './components/Tracks.jsx';
+import Genres from './components/Genres.jsx';
 import myCookies from './cookiesfunc.js';
 
 function Home() {
@@ -23,7 +24,7 @@ function Home() {
           }).then((res) => {
             setUser(res.data['display_name']);
           })
-    })
+    },[])
     return (
         <div>
             Welcome, {user}!
@@ -32,6 +33,9 @@ function Home() {
             </div>
             <div>
               <Tracks />
+            </div>
+            <div>
+              <Genres />
             </div>
         </div>
     )

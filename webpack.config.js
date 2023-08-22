@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const DotenvWebpackPlugin = require('dotenv-webpack');
 const port = process.env.PORT || 3002;
 
 module.exports = {
@@ -29,6 +30,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './client/public/index.html'
     }),
+    new DotenvWebpackPlugin()
   ],
   module: {
     rules: [

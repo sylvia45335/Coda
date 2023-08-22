@@ -1,8 +1,7 @@
 require('dotenv').config();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3002;
 const CLIENT_ID = process.env.CLIENT_ID;
 const SECRET_KEY = process.env.SECRET_KEY;
-//set falsey alternatives just in case
 const REDIRECT_URI = process.env.REDIRECT_URI;
 
 //separate SpotifyWebApis for the actual API calls with access tokens
@@ -32,7 +31,7 @@ app.use(cookieParser());
 
 //for cors header if making calls to backend api
 app.use(cors());
-
+  
 //configure middleware and static pages here
 app.use(express.static(path.join(__dirname, '../client/public')));
 
@@ -117,7 +116,8 @@ app.get('/api/home', (req, res) => {
             });
             res.cookie("refToken", data.body["refresh_token"]);
 
-            //redirect user
+            //console.log(data.body);
+            //redirect user to home page
             return res.status(200).redirect('http://localhost:8080/home');
         })
     }
@@ -127,24 +127,24 @@ app.get('/api/home', (req, res) => {
 app.get('/api/tracks', accTokenRefresh, (req, res) => {
     const spotifyAPI = new SpotifyWebApi({ accessToken: req.cookies.accToken });
 
-    let count = 20;
+    let count = 10;
 
     spotifyAPI
       .getMyTopTracks({ limit: count, time_range: "short_term" })
       .then((data) => {
-        return res.status(200).send(`<pre>${JSON.stringify(data.body.items, null, 2)}</pre>`);
+        return res.status(200).json(data.body.items);
       });
 });
 
 app.get('/api/artists', accTokenRefresh, (req, res) => {
     const spotifyAPI = new SpotifyWebApi({ accessToken: req.cookies.accToken });
 
-    let count = 20;
+    let count = 10;
 
     spotifyAPI
       .getMyTopArtists({ limit: count, time_range: "short_term" })
       .then((data) => {
-        return res.status(200).send(`<pre>${JSON.stringify(data.body.items, null, 2)}</pre>`);
+        return res.status(200).json(data.body.items);
       });
 });
 
@@ -154,7 +154,7 @@ app.get('/api/profile', accTokenRefresh, (req, res) => {
     spotifyAPI
       .getMe()
       .then((data) => {
-        return res.status(200).send(`<pre>${JSON.stringify(data.body, null, 2)}</pre>`);
+        return res.status(200).json(data.body);
       })
 });
 

@@ -1,14 +1,15 @@
 import * as _ from 'lodash';
 import * as React from "react";
 import axios from 'axios';
-import Tracks from './components/Tracks.jsx';
 
-function Home() {
+function Genres() {
+    const PORT = process.env.REACT_APP_PORT;
+
     return (
         <div>
-            <Tracks />
+            Genres
         </div>
     )
-};
+}
 
-export default Home;
+export default Genres;

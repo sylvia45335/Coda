@@ -2,8 +2,7 @@ import * as _ from 'lodash';
 import * as React from "react";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import myCookies from '../cookiesfunc.js';
-// import { Pie } from 'react-chartjs-2';
+import myCookies from '../cookies.js';
 
 function Genres() {
     const [label, setLabel] = useState([]);
@@ -36,20 +35,24 @@ function Genres() {
             }
 
 
-            console.log(poll);
+            // console.log(poll);
             const labelSorted = Object.keys(poll).sort((a, b) => poll[b] - [a]);
-            console.log(labelSorted);
+            // console.log(labelSorted);
             const dataSorted = Object.values(poll).sort((a, b) => b-a);
-            console.log(dataSorted);
-            // setLabel(keysLabel);
-            // setData(valueData);
+            // console.log(dataSorted);
+            const topLabels = [];
+            const topData = [];
+            for(let i = 0; i < 5; i++) {
+                topLabels.push(labelSorted[i]);
+                topData.push(dataSorted[i]);
+            }
+
+            console.log(topLabels, topData);
+            setLabel(topLabels);
+            setData(topData);
 
           })
     },[]);
-
-    const dataSet = {
-
-    };
 
     return (
         <div>

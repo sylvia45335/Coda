@@ -2,42 +2,25 @@ import * as _ from 'lodash';
 import * as React from "react";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import myCookies from '../cookies.js';
 
 function Tracks() {
     const [tracks, setTracks] = useState([]);
     const [trackArt, setTrackArt] = useState([]);
 
     const PORT = process.env.REACT_APP_PORT;
-    const apiURL = `http://localhost:${PORT}/api/tracks`
-
-      function getCookie(cname) {
-        let name = cname + "=";
-        let decodedCookie = decodeURIComponent(document.cookie);
-        let ca = decodedCookie.split(';');
-        for(let i = 0; i <ca.length; i++) {
-          let c = ca[i];
-          while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-          }
-        }
-        return "";
-      }
-
-      const myCookies = getCookie('accToken');
+    const apiURL = `http://localhost:${PORT}/api/tracks`;
 
     useEffect(() => {
         axios({
             method: 'get',
             url: apiURL,
             withCredentials: false,
-            params: {
-              access_token: myCookies,
+            headers: {
+              Authorization: myCookies
             },
           }).then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             const myTracks = [];
             const myTrackArt = [];
 
@@ -59,16 +42,17 @@ function Tracks() {
 
             setTrackArt(myTrackArt);
             setTracks(myTracks);
-          })
-    },[tracks, trackArt])
+          }).catch((err) => console.log(err));
+    },[]);
+
     return (
         <div>
-            <div>
-              {tracks}
-            </div>
-            <div>
-              {trackArt}
-            </div>
+          <div>
+            {tracks}
+          </div>
+          <div>
+            {trackArt}
+          </div>
         </div>
     )
 }

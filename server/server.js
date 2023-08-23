@@ -1,5 +1,5 @@
 require('dotenv').config();
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT;
 const CLIENT_ID = process.env.CLIENT_ID;
 const SECRET_KEY = process.env.SECRET_KEY;
 const REDIRECT_URI = process.env.REDIRECT_URI;
@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, '../client/public')));
 
 //routes
 //leads the user to the Spotify page for the user to enter their login credentials
-app.get('/api/login', (req, res) => {
+app.get('/api/login', async(req, res) => {
     //recommended to adding a state variable to avoid cross site attacks
     //generate a random string of letters and numbers
     const generateRandomString = (length) => {
@@ -65,7 +65,7 @@ app.get('/api/login', (req, res) => {
     //second param is state and is optional
         //state we pass will be returned from Spotify
         //check against the user's cookies to make sure it matches, no match = boot them out
-    const loginLink = spotifyAuthAPI.createAuthorizeURL(scopes, stateString);
+    const loginLink = await spotifyAuthAPI.createAuthorizeURL(scopes, stateString);
 
     //send user to Spotify Account Login
     res.redirect(loginLink);
@@ -123,31 +123,33 @@ app.get('/api/home', (req, res) => {
     }
 });
 
-//get Top Tracks and Artists
+//get Top Tracks
 app.get('/api/tracks', accTokenRefresh, (req, res) => {
     const spotifyAPI = new SpotifyWebApi({ accessToken: req.cookies.accToken });
 
-    let count = 10;
+    let count = 5;
 
     spotifyAPI
       .getMyTopTracks({ limit: count, time_range: "short_term" })
       .then((data) => {
         return res.status(200).json(data.body.items);
-      });
+      }).catch((err) => console.log(err));
 });
 
+//get Top Artists
 app.get('/api/artists', accTokenRefresh, (req, res) => {
     const spotifyAPI = new SpotifyWebApi({ accessToken: req.cookies.accToken });
 
-    let count = 10;
+    let count = 5;
 
     spotifyAPI
       .getMyTopArtists({ limit: count, time_range: "short_term" })
       .then((data) => {
         return res.status(200).json(data.body.items);
-      });
+      }).catch((err) => console.log(err));
 });
 
+//get User profile
 app.get('/api/profile', accTokenRefresh, (req, res) => {
     const spotifyAPI = new SpotifyWebApi({ accessToken: req.cookies.accToken });
 
@@ -155,7 +157,7 @@ app.get('/api/profile', accTokenRefresh, (req, res) => {
       .getMe()
       .then((data) => {
         return res.status(200).json(data.body);
-      })
+      }).catch((err) => console.log(err));
 });
 
 // catch all

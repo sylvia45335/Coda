@@ -4,11 +4,40 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Artists from './components/Artists.jsx';
 import Tracks from './components/Tracks.jsx';
+import Genres from './components/Genres.jsx';
+import myCookies from './cookies.js';
 
 function Home() {
+    const [user, setUser] = useState('');
+
+    const PORT = process.env.REACT_APP_PORT;
+    const apiURL = `http://localhost:${PORT}/api/profile`;
+
+    useEffect(() => {
+        axios({
+            method: 'get',
+            url: apiURL,
+            withCredentials: false,
+            headers: {
+                Authorization: myCookies
+            },
+          }).then((res) => {
+            setUser(res.data['display_name']);
+          }).catch((err) => console.log(err));
+    },[])
+
     return (
         <div>
-            <Tracks />
+            Welcome, {user}!
+            <div>
+                <Tracks />
+            </div>
+            <div>
+                <Artists />
+            </div>
+            <div>
+                <Genres />
+            </div>
         </div>
     )
 };

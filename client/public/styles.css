@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+body {
+    background-color: #191414;
+    background-image: linear-gradient(rgb(70, 68, 68), rgb(0, 0, 0));
+    width: 100vw;
+    height: 100vh;
+}
+
+.login {
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    position: absolute;
+    top: 45%;
+    left: 45%;
+}
+
+.loginLogo {
+    height: 200px;
+    width: 200px;
+    background: linear-gradient(#1ed760, #35a55c);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginLogo::before, .loginLogo::after {
+    content:'';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #6adb91;
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.7;
+}
+
+.loginLogo::before {
+    animation: pulse 2s ease-out infinite;
+}
+
+.loginLogo::after {
+    animation: pulse 2s 1s ease-out infinite;
+}
+
+@keyframes pulse {
+    100%{
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+.loginName {
+    text-decoration: none;
+    color: #ffffff;
+    font-family: Anton;
+    font-size: 8vh;
+    opacity: 70%;
+    text-shadow: 1px 1px 2px grey;
+}
+
+.loginName:hover {
+    opacity: 100%;
+    transform: translateY(-5px);
+    text-shadow: 1px 1px 2px rgb(166, 163, 163);
+}

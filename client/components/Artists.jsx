@@ -20,7 +20,7 @@ function Artists() {
                 Authorization: myCookies
             },
           }).then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             const artList = [];
             for(let i = 0; i < res.data.length; i++) {
                 artList.push(res.data[i].name);
@@ -30,8 +30,10 @@ function Artists() {
     },[]);
 
     return(
-        <div>
-            {artists}
+        <div className="artistContainer">
+            <ul>
+            {artists.map((x, index) => (<li key={index}>{artists[index]}</li>))}
+            </ul>
         </div>
     )
 }

@@ -3,6 +3,10 @@ import * as React from "react";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import myCookies from '../cookies.js';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Pie } from 'react-chartjs-2';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 function Genres() {
     const [label, setLabel] = useState([]);
@@ -47,16 +51,37 @@ function Genres() {
                 topData.push(dataSorted[i]);
             }
 
-            console.log(topLabels, topData);
+            // console.log(topLabels, topData);
             setLabel(topLabels);
             setData(topData);
 
           })
     },[]);
 
+    const pieData = {
+        labels: label,
+        datasets: [{
+            data: data,
+            backgroundColor: ['#205072', '#329d9c', '#56c596', '#7be495', '#cff4d2']
+        }],
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    }
+
     return (
-        <div>
-            Genres
+        <div className="genreContainer">
+            <div className="chart">
+              <Pie data={pieData} />
+            </div>
         </div>
     )
 }

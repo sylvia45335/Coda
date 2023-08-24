@@ -46,13 +46,16 @@ function Tracks() {
     },[]);
 
     return (
-        <div>
-          <div>
-            {tracks}
-          </div>
-          <div>
+        <div className="tracksContainer">
+          <ul className="trackList">
+          {tracks.map((x, index) => (<li key={index} className="trackItem">{tracks[index] + ' by ' + trackArt[index]}</li>))}
+          </ul>
+          {/* <div className="trackArtist">
+            <h3>Artist</h3>
+            <ul>
             {trackArt}
-          </div>
+            </ul>
+          </div> */}
         </div>
     )
 }

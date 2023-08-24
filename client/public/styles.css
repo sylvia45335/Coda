@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@300&display=swap');
 
 body {
     background-color: #191414;
@@ -8,9 +10,6 @@ body {
 }
 
 .login {
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
     position: absolute;
     top: 45%;
     left: 45%;
@@ -65,4 +64,139 @@ body {
     opacity: 100%;
     transform: translateY(-5px);
     text-shadow: 1px 1px 2px rgb(166, 163, 163);
+}
+
+.header {
+    color: white;
+    font-family: Bebas Neue;
+    line-height: 100px;
+    font-size: 100px;
+    padding-left: 5px;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 450px;
+    gap: 10px;
+}
+
+.container div {
+    flex: 0 0 120px;
+    border-radius: 0.5rem;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+    box-shadow: 1px 2px 15px gray;
+    position: relative;
+    overflow: hidden;
+}
+
+.container div:hover {
+    flex: 0 0 375px;
+    box-shadow: 1px 2px 15px grey;
+    transform: translatey(0%);
+    transition: 0.5s ease-in-out;
+}
+
+/* .container div .trackCardContent {
+    visibility: hidden;
+}
+
+.container div:hover .trackCardContent {
+    opacity: 1;
+    transform: translatey(0%);
+    visibility: visible;
+}  */
+
+.trackCard {
+    background-color: #d3c5e3;
+}
+
+.trackCard h2 {
+    color: #825fdc;
+    text-shadow: 2px 2px 1.5rem rgba(130, 39, 166, 0.579);
+    padding-left: 5px;
+    font-family: Bebas Neue;
+    font-size: 50px;
+}
+
+.tracksContainer {
+    height: 60vh;
+    width: 50vw;
+    background-color: #c4b2d9;
+    display: flex;
+    flex-direction: column;
+}
+
+.tracksContainer li {
+    width: 22vw;
+    font-size: 20px;
+    font-weight: 900;
+    color: #8965b3;
+    font-family: Noto Sans Display;
+    text-shadow: 0 0 1.5rem #f0ecf6;
+    border-bottom: 3px solid;
+    border-bottom-color:rgba(186, 153, 200, 0.579);
+}
+
+
+ul {
+    list-style-type: none;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+.artistCard {
+    background-color: #d4ebd2;
+}
+
+.artistCard h2 {
+    color: #71bc68;
+    text-shadow: 2px 2px 1.5rem rgba(44, 137, 59, 0.66);
+    padding-left: 5px;
+    font-family: Bebas Neue;
+    font-size: 50px;
+}
+
+.artistContainer {
+    height: 60vh;
+    width: 45vw;
+    background-color: #b8deb4;
+    display: flex;
+    flex-direction: column;
+}
+
+.artistContainer li {
+    width: 22vw;
+    font-size: 25px;
+    font-weight: 900;
+    color: #68c05f;
+    font-family: Noto Sans Display;
+    border-bottom: 3px solid;
+    border-bottom-color:rgba(153, 200, 159, 0.579);
+}
+
+.genreCard {
+    background-color: #ffe0b3;
+}
+
+.genreCard h2 {
+    color: #ffa219;
+    text-shadow: 2px 2px 1.5rem rgba(188, 123, 32, 0.61);
+    padding-left: 5px;
+    font-family: Bebas Neue;
+    font-size: 50px;
+}
+
+.genreContainer {
+    width: 100%;
+    height: 50vh;
+    background-color: #ffd699;
+}
+
+.chart {
+    height: 43vh;
 }

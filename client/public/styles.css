@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
 
 body {
     background-color: #191414;
     background-image: linear-gradient(rgb(70, 68, 68), rgb(0, 0, 0));
     width: 100vw;
-    height: 100vh;
+    height: 120vh;
 }
 
 .login {
@@ -69,12 +70,12 @@ body {
 .header {
     color: white;
     font-family: Bebas Neue;
-    line-height: 100px;
+    line-height: 30px;
     font-size: 100px;
     padding-left: 5px;
 }
 
-.container {
+/* .container {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -83,7 +84,7 @@ body {
 }
 
 .container div {
-    flex: 0 0 120px;
+    flex: 0 0 150px;
     border-radius: 0.5rem;
     transition: 0.5s ease-in-out;
     cursor: pointer;
@@ -109,13 +110,13 @@ body {
     visibility: visible;
 }  */
 
-.trackCard {
+/* .trackCard {
     background-color: #d3c5e3;
 }
 
 .trackCard h2 {
     color: #825fdc;
-    text-shadow: 2px 2px 1.5rem rgba(130, 39, 166, 0.579);
+    text-shadow: 2px 2px 1.5rem rgba(172, 57, 217, 0.951);
     padding-left: 5px;
     font-family: Bebas Neue;
     font-size: 50px;
@@ -155,7 +156,7 @@ ul li {
 
 .artistCard h2 {
     color: #71bc68;
-    text-shadow: 2px 2px 1.5rem rgba(44, 137, 59, 0.66);
+    text-shadow: 2px 2px 1.5rem rgba(5, 182, 93, 0.992);
     padding-left: 5px;
     font-family: Bebas Neue;
     font-size: 50px;
@@ -185,7 +186,7 @@ ul li {
 
 .genreCard h2 {
     color: #ffa219;
-    text-shadow: 2px 2px 1.5rem rgba(188, 123, 32, 0.61);
+    text-shadow: 2px 2px 1.5rem rgb(231, 146, 55);
     padding-left: 5px;
     font-family: Bebas Neue;
     font-size: 50px;
@@ -199,4 +200,103 @@ ul li {
 
 .chart {
     height: 43vh;
+}  */
+
+img {
+    height: 12vh;
+    width: 6vw;
+    margin-right: 30px;
+    margin-left: 20px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    margin-bottom: 8px;
+    font-family: Oswald;
+    display: flex;
+    align-items: center;
+    font-size: 2em;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.container div {
+    position: absolute;
+    width: 80vw;
+    height: 88vh;
+    padding: 3px 0 3px 0;
+    margin-top: 8px;
+}
+
+.carouselIndicator {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    border-radius: 50%;
+    height: 10px;
+    width: 1px;
+    margin-right: 8px;
+    background-color: rgb(255, 255, 255);
+    border: none;
+}
+
+.container div h2 {
+    font-family: Bebas Neue;
+    font-size: 5em;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-align: center;
+}
+
+.trackHome {
+    background-color: #C8A2C8;
+    border: solid rgba(255, 21, 185, 0.991);
+    background-image: linear-gradient(rgb(185, 98, 222),rgb(99, 34, 112));
+    border-radius: 1.5em;
+}
+
+.trackCard h2{
+    color: #7f165c;
+    text-shadow: 2px 2px #f36bc6;
+}
+
+.trackCard li {
+    color: rgb(229, 229, 37);
+}
+
+.artistHome {
+    background: blue;
+    background-image: linear-gradient(rgb(71, 90, 229), rgb(31, 8, 163));
+    border: solid rgb(50, 228, 235);
+    border-radius: 1.5em;
+}
+
+.artistCard h2 {
+    color: rgb(228, 82, 228);
+    text-shadow: 2px 2px #15c2ed;
+}
+
+.artistCard li {
+    color: rgb(0, 238, 255);
+    margin-left: 40px;
+}
+
+.genreHome {
+    background: rgb(226, 115, 220);
+    background-image: linear-gradient(rgb(242, 135, 244), rgb(219, 52, 185));
+    border: solid rgb(20, 240, 90);
+    border-radius: 1.5em;
+}
+
+.genreCard h2 {
+    color: rgb(20, 108, 58);
+    text-shadow: 2px 2px #c0ea16;
 }

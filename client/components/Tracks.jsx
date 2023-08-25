@@ -7,6 +7,7 @@ import myCookies from '../cookies.js';
 function Tracks() {
     const [tracks, setTracks] = useState([]);
     const [trackArt, setTrackArt] = useState([]);
+    const [trackImg, setTrackImg] = useState([]);
 
     const PORT = process.env.REACT_APP_PORT;
     const apiURL = `http://localhost:${PORT}/api/tracks`;
@@ -23,6 +24,7 @@ function Tracks() {
             // console.log(res.data);
             const myTracks = [];
             const myTrackArt = [];
+            const myTrackImg = [];
 
             for(let i = 0; i < res.data.length; i++) {
                 myTracks.push(res.data[i].name);
@@ -40,6 +42,13 @@ function Tracks() {
                 myTrackArt.push(art);
             }
 
+            for(let i = 0; i < res.data.length; i++) {
+              myTrackImg.push(res.data[i].album.images[0].url);
+            }
+
+            // console.log(myTrackImg);
+
+            setTrackImg(myTrackImg);
             setTrackArt(myTrackArt);
             setTracks(myTracks);
           }).catch((err) => console.log(err));
@@ -48,14 +57,8 @@ function Tracks() {
     return (
         <div className="tracksContainer">
           <ul className="trackList">
-          {tracks.map((x, index) => (<li key={index} className="trackItem">{tracks[index] + ' by ' + trackArt[index]}</li>))}
+          {tracks.map((x, index) => (<li key={index} className="trackItem">#{[index + 1]} <img src={trackImg[index]}></img>{tracks[index] + ' - ' + trackArt[index]}</li>))}
           </ul>
-          {/* <div className="trackArtist">
-            <h3>Artist</h3>
-            <ul>
-            {trackArt}
-            </ul>
-          </div> */}
         </div>
     )
 }

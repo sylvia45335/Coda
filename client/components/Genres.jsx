@@ -78,8 +78,8 @@ function Genres() {
     }
 
     return (
-        <div className="genreContainer">
-            <div className="chart">
+        <div className="genreContainer" align="center">
+            <div className="chart" style={{height: '68vh'}}>
               <Pie data={pieData} />
             </div>
         </div>

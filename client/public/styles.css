@@ -7,7 +7,7 @@ body {
     background-color: #191414;
     background-image: linear-gradient(rgb(70, 68, 68), rgb(0, 0, 0));
     width: 100vw;
-    height: 120vh;
+    height: 130vh;
 }
 
 .login {
@@ -67,6 +67,64 @@ body {
     text-shadow: 1px 1px 2px rgb(166, 163, 163);
 }
 
+.topData {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.buttonData {
+    display: flex;
+    flex-direction: column;
+    grid-column: 4/4;
+    margin-top: 30px;
+}
+
+.topData button {
+    height: 30px;
+    width: 200px;
+    margin-bottom: 5px;
+    align-items: center;
+    appearance: none;
+    background-color: #FCFCFD;
+    border-radius: 4px;
+    border-width: 0;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #36395A;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: Oswald ,monospace;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s,transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow,transform;
+    font-size: 18px;
+}
+
+.topData button:focus {
+  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.topData button:active {
+  box-shadow: #D6D6E7 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
+.headerContainer {
+    grid-column: 1/3;
+}
+
 .header {
     color: white;
     font-family: Bebas Neue;
@@ -74,133 +132,6 @@ body {
     font-size: 100px;
     padding-left: 5px;
 }
-
-/* .container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    height: 450px;
-    gap: 10px;
-}
-
-.container div {
-    flex: 0 0 150px;
-    border-radius: 0.5rem;
-    transition: 0.5s ease-in-out;
-    cursor: pointer;
-    box-shadow: 1px 2px 15px gray;
-    position: relative;
-    overflow: hidden;
-}
-
-.container div:hover {
-    flex: 0 0 375px;
-    box-shadow: 1px 2px 15px grey;
-    transform: translatey(0%);
-    transition: 0.5s ease-in-out;
-}
-
-/* .container div .trackCardContent {
-    visibility: hidden;
-}
-
-.container div:hover .trackCardContent {
-    opacity: 1;
-    transform: translatey(0%);
-    visibility: visible;
-}  */
-
-/* .trackCard {
-    background-color: #d3c5e3;
-}
-
-.trackCard h2 {
-    color: #825fdc;
-    text-shadow: 2px 2px 1.5rem rgba(172, 57, 217, 0.951);
-    padding-left: 5px;
-    font-family: Bebas Neue;
-    font-size: 50px;
-}
-
-.tracksContainer {
-    height: 60vh;
-    width: 50vw;
-    background-color: #c4b2d9;
-    display: flex;
-    flex-direction: column;
-}
-
-.tracksContainer li {
-    width: 22vw;
-    font-size: 20px;
-    font-weight: 900;
-    color: #8965b3;
-    font-family: Noto Sans Display;
-    text-shadow: 0 0 1.5rem #f0ecf6;
-    border-bottom: 3px solid;
-    border-bottom-color:rgba(186, 153, 200, 0.579);
-}
-
-
-ul {
-    list-style-type: none;
-}
-
-ul li {
-    margin-bottom: 10px;
-}
-
-.artistCard {
-    background-color: #d4ebd2;
-}
-
-.artistCard h2 {
-    color: #71bc68;
-    text-shadow: 2px 2px 1.5rem rgba(5, 182, 93, 0.992);
-    padding-left: 5px;
-    font-family: Bebas Neue;
-    font-size: 50px;
-}
-
-.artistContainer {
-    height: 60vh;
-    width: 45vw;
-    background-color: #b8deb4;
-    display: flex;
-    flex-direction: column;
-}
-
-.artistContainer li {
-    width: 22vw;
-    font-size: 25px;
-    font-weight: 900;
-    color: #68c05f;
-    font-family: Noto Sans Display;
-    border-bottom: 3px solid;
-    border-bottom-color:rgba(153, 200, 159, 0.579);
-}
-
-.genreCard {
-    background-color: #ffe0b3;
-}
-
-.genreCard h2 {
-    color: #ffa219;
-    text-shadow: 2px 2px 1.5rem rgb(231, 146, 55);
-    padding-left: 5px;
-    font-family: Bebas Neue;
-    font-size: 50px;
-}
-
-.genreContainer {
-    width: 100%;
-    height: 50vh;
-    background-color: #ffd699;
-}
-
-.chart {
-    height: 43vh;
-}  */
 
 img {
     height: 12vh;
@@ -239,7 +170,7 @@ li {
     justify-content: center;
 }
 
-button {
+.trackButton, .artistButton, .genreButton {
     border-radius: 50%;
     height: 10px;
     width: 1px;
@@ -274,7 +205,7 @@ button {
 
 .artistHome {
     background: blue;
-    background-image: linear-gradient(rgb(71, 90, 229), rgb(31, 8, 163));
+    background-image: linear-gradient(rgb(82, 110, 194), rgb(31, 8, 163));
     border: solid rgb(50, 228, 235);
     border-radius: 1.5em;
 }
@@ -291,7 +222,7 @@ button {
 
 .genreHome {
     background: rgb(226, 115, 220);
-    background-image: linear-gradient(rgb(242, 135, 244), rgb(219, 52, 185));
+    background-image: linear-gradient(rgb(231, 151, 232), rgb(218, 89, 192));
     border: solid rgb(20, 240, 90);
     border-radius: 1.5em;
 }
@@ -299,4 +230,13 @@ button {
 .genreCard h2 {
     color: rgb(20, 108, 58);
     text-shadow: 2px 2px #c0ea16;
+}
+
+/* .trackHome {
+    animation: fadeIn 3s;
+} */
+
+@keyframes fadeIn {
+    0% { opacity: 0% }
+    100% { opacity: 100% }
 }

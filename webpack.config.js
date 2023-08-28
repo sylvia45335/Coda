@@ -4,6 +4,7 @@ const DotenvWebpackPlugin = require('dotenv-webpack');
 const port = process.env.PORT || 3002;
 
 module.exports = {
+  devtool: 'eval-source-map',
   entry: './client/index.js',
   output: {
     path: path.join(__dirname, '/dist'),

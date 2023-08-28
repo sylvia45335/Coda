@@ -126,11 +126,12 @@ app.get('/api/home', (req, res) => {
 //get Top Tracks
 app.get('/api/tracks', accTokenRefresh, (req, res) => {
     const spotifyAPI = new SpotifyWebApi({ accessToken: req.cookies.accToken });
+    const { term } = req.query
 
     let count = 5;
 
     spotifyAPI
-      .getMyTopTracks({ limit: count, time_range: "short_term" })
+      .getMyTopTracks({ limit: count, time_range: term})
       .then((data) => {
         return res.status(200).json(data.body.items);
       }).catch((err) => console.log(err));
@@ -139,11 +140,12 @@ app.get('/api/tracks', accTokenRefresh, (req, res) => {
 //get Top Artists
 app.get('/api/artists', accTokenRefresh, (req, res) => {
     const spotifyAPI = new SpotifyWebApi({ accessToken: req.cookies.accToken });
+    const { term } = req.query;
 
     let count = 5;
 
     spotifyAPI
-      .getMyTopArtists({ limit: count, time_range: "short_term" })
+      .getMyTopArtists({ limit: count, time_range: term })
       .then((data) => {
         return res.status(200).json(data.body.items);
       }).catch((err) => console.log(err));

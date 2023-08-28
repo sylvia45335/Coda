@@ -5,7 +5,7 @@ import { Pie } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-function Genres({ label, data }) {
+function Genres({ label, data, id }) {
 
     const pieData = {
         labels: label,
@@ -27,7 +27,7 @@ function Genres({ label, data }) {
     }
 
     return (
-        <div className="genreContainer" align="center">
+        <div className="genreContainer" align="center" id={id}>
             <div className="chart" style={{height: '68vh'}}>
               <Pie data={pieData} />
             </div>

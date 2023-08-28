@@ -144,18 +144,30 @@ function Home() {
         setTrackDisplay(true);
         setArtistDisplay(false);
         setGenreDisplay(false);
+
+        const element = document.getElementById('insideTrack');
+        element.classList.add('transition');
+        setTimeout(function(){element.classList.remove('transition');}, 1000);
     }
 
     function artistButton() {
         setTrackDisplay(false);
         setArtistDisplay(true);
         setGenreDisplay(false);
+
+        const element = document.getElementById('insideArtist');
+        element.classList.add('transition');
+        setTimeout(function(){element.classList.remove('transition');}, 1000);
     }
 
     function genreButton() {
         setTrackDisplay(false);
         setArtistDisplay(false);
         setGenreDisplay(true);
+
+        const element = document.getElementById('insideGenre');
+        element.classList.add('transition');
+        setTimeout(function(){element.classList.remove('transition');}, 1000);
     }
 
     function short() {
@@ -163,6 +175,23 @@ function Home() {
         setShortButton(true);
         setMediumButton(false);
         setLongButton(false);
+
+
+        if(shortButton === false && trackDisplay === true) {
+          const element = document.getElementById('trackList');
+          element.classList.add('transition');
+          setTimeout(function(){element.classList.remove('transition');}, 1000);
+        }
+        if(shortButton === false && artistDisplay === true) {
+            const element = document.getElementById('artistList');
+            element.classList.add('transition');
+            setTimeout(function(){element.classList.remove('transition');}, 1000);
+        }
+        if(shortButton === false && genreDisplay === true) {
+            const element = document.getElementById('genreList');
+            element.classList.add('transition');
+            setTimeout(function(){element.classList.remove('transition');}, 1000);
+        }
     }
 
     function medium() {
@@ -170,6 +199,22 @@ function Home() {
         setShortButton(false);
         setMediumButton(true);
         setLongButton(false);
+
+        if(mediumButton === false && trackDisplay === true) {
+            const element = document.getElementById('trackList');
+            element.classList.add('transition');
+            setTimeout(function(){element.classList.remove('transition');}, 1000);
+        }
+        if(mediumButton === false && artistDisplay === true) {
+            const element = document.getElementById('artistList');
+            element.classList.add('transition');
+            setTimeout(function(){element.classList.remove('transition');}, 1000);
+        }
+        if(mediumButton === false && genreDisplay === true) {
+            const element = document.getElementById('genreList');
+            element.classList.add('transition');
+            setTimeout(function(){element.classList.remove('transition');}, 1000);
+        }
     }
 
     function long() {
@@ -177,6 +222,22 @@ function Home() {
         setShortButton(false);
         setMediumButton(false);
         setLongButton(true);
+
+        if(longButton === false && trackDisplay === true) {
+            const element = document.getElementById('trackList');
+            element.classList.add('transition');
+            setTimeout(function(){element.classList.remove('transition');}, 1000);
+        }
+        if(longButton === false && artistDisplay === true) {
+            const element = document.getElementById('artistList');
+            element.classList.add('transition');
+            setTimeout(function(){element.classList.remove('transition');}, 1000);
+        }
+        if(longButton === false && genreDisplay === true) {
+            const element = document.getElementById('genreList');
+            element.classList.add('transition');
+            setTimeout(function(){element.classList.remove('transition');}, 1000);
+        }
     }
 
 
@@ -198,22 +259,22 @@ function Home() {
                 <button className="genreButton" onClick={genreButton} style={genreDisplay === true ? {opacity: '100%'} : {opacity: '30%'}}/>
             </div>
             <div className="container">
-                <div style={trackDisplay === true ? {visibility: 'visible'} : {visibility: 'hidden'}} className="trackHome">
-                    <div className="trackCard">
+                <div style={trackDisplay === true ? {visibility: 'visible'} : {visibility: 'hidden'}} className="trackHome" id="track">
+                    <div className="trackCard" id="insideTrack">
                         <h2>Top Tracks</h2>
-                        <Tracks tracks={tracks} trackArt={trackArt} trackImg={trackImg}/>
+                        <Tracks tracks={tracks} trackArt={trackArt} trackImg={trackImg} id="trackList"/>
                     </div>
                 </div>
-                <div style={artistDisplay === true ? {visibility: 'visible'} : {visibility: 'hidden'}} className="artistHome">
-                    <div className="artistCard">
+                <div style={artistDisplay === true ? {visibility: 'visible'} : {visibility: 'hidden'}} className="artistHome" id="artist">
+                    <div className="artistCard" id="insideArtist">
                         <h2>Top Artists</h2>
-                        <Artists artists={artists} artistImg={artistImg}/>
+                        <Artists artists={artists} artistImg={artistImg} id="artistList"/>
                     </div>
                 </div>
-                <div style={genreDisplay === true ? {visibility: 'visible'} : {visibility: 'hidden'}} className="genreHome">
-                    <div className="genreCard">
+                <div style={genreDisplay === true ? {visibility: 'visible'} : {visibility: 'hidden'}} className="genreHome" id="genre">
+                    <div className="genreCard" id="insideGenre">
                         <h2>Top Genres</h2>
-                        <Genres label={label} data={data}/>
+                        <Genres label={label} data={data} id="genreList"/>
                     </div>
                 </div>
             </div>

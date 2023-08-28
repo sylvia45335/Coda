@@ -187,6 +187,19 @@ li {
     text-align: center;
 }
 
+.transition {
+    animation: fadeIn 1s;
+    -webkit-animation: fadeIn 1s;
+    -moz-animation: fadeIn 1s;
+    -o-animation: fadeIn 1s;
+    -ms-animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0.8; }
+    100% { opacity: 1 ;}
+}
+
 .trackHome {
     background-color: #C8A2C8;
     border: solid rgba(255, 21, 185, 0.991);

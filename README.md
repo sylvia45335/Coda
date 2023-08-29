@@ -10,7 +10,7 @@
   <div>
     <h4>Getting started and logging in</h4>
     <div style="display:block;text-align:center">
-      <img src="client/public/Login.gif" alt="login logo">
+      <img src="client/public/Login.gif" alt="login logo" style="height:200px;width:300px">
     </div>
   </div>
 </div>

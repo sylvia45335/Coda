@@ -11,7 +11,7 @@
   <div>
     <h3>Getting started and logging in</h3>
     <div style="display:block;text-align:center">
-      <img src="client/public/Login.gif" alt="login logo" style="height:300px;width:500px">
+      <img src="client/public/Login.gif" alt="login logo" style="height:300px;width:550px">
     </div>
   </div>
 </div>

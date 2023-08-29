@@ -1,6 +1,6 @@
 <div align="center">
   <h1>Welcome to Coda</h1>
-  <h3>Tired of waiting for the end of the year to view your Spotify Wrapped? With Coda, you can view your personal Spotify stats to see your recently top artists, tracks, &amp; genres!</h3>
+  <h3>Tired of waiting for the end of the year to view your Spotify Wrapped? With Coda, you can view your personalized Spotify stats to see your recently top artists, tracks, &amp; genres!</h3>
   
   <br />
   <br />

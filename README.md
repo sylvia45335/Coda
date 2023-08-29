@@ -48,8 +48,10 @@
   <div>
     <h3>What do I do if my application can't run?</h3>
     <p>If you're running into a cors error, please place the following line of code into your terminal. Then, run the localhost within that browser.</p>
+    
     ```
     /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir="/tmp/chrome_dev_session" --disable-web-security
     ```
+    
   </div>
 </div>

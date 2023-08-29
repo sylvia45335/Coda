@@ -11,7 +11,7 @@
   <div>
     <h3>Getting started and logging in</h3>
     <div style="display:block;text-align:center">
-      <img src="" alt="login logo" style="height:300px;width:550px">
+      <img src="client/public/Login.gif" alt="login logo" style="height:300px;width:550px">
     </div>
     <p>Clicking on the Login logo will redirect you to Spotify's authorization page, which is where you will need to login with your Spotify account!</p>
     <div style="display:block;text-align:center">

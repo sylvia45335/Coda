@@ -15,7 +15,7 @@
     </div>
     <p>Clicking on the Login logo will redirect you to Spotify's authorization page, which is where you will need to login with your Spotify account!</p>
     <div style="display:block;text-align:center">
-      <img src="" alt="Spotify Account Login Page" style="height:500px;width:800px">
+      <img src="client/public/SpotifyAcc.gif" alt="Spotify Account Login Page" style="height:500px;width:800px">
     </div>
   </div>
 </div>
